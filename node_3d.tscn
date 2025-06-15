@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwfmk7wnthrqa"]
+[gd_scene load_steps=6 format=3 uid="uid://bwfmk7wnthrqa"]
+
+[ext_resource type="PackedScene" uid="uid://c43e2r2m0o6j6" path="res://a_normal_animal_hippo_0614065217_texture.blend" id="1_a202f"]
+[ext_resource type="Script" uid="uid://rlxn7yo7i1gf" path="res://hippo_movement.gd" id="2_noarx"]
 
 [sub_resource type="Environment" id="Environment_4xowi"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -7,11 +10,15 @@ adjustment_brightness = 1.8
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a202f"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
+size = Vector3(1.05273, 1.15918, 1.86328)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.192444, 0)
 use_collision = true
-size = Vector3(75, 1, 75)
+size = Vector3(75, 0.615112, 75)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.929, 32.8633, -11.8381)
@@ -22,5 +29,13 @@ sky_mode = 1
 environment = SubResource("Environment_4xowi")
 camera_attributes = SubResource("CameraAttributesPractical_a202f")
 
-[node name="Camera3D" type="Camera3D" parent="DirectionalLight3D/WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.52814, 15.2513, 59.9886)
+[node name="hippopotamus" parent="." instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.08988, -3.94269)
+script = ExtResource("2_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hippopotamus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0263672, 0.0795898, -0.0253906)
+shape = SubResource("BoxShape3D_a0tk4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.956895, 0.0884177, -0.276649, -0.0526982, 0.883866, 0.464762, 0.285614, 0.459307, -0.841107, 12.9566, 2.60821, -5.52667)
